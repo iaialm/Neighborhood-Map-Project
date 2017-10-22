@@ -84,6 +84,32 @@ var model = [{
 //////
 /////
 
+
+
+ 
+$(document).ready(function(){
+ 
+    $.ajax({
+        type: "GET",
+        url: "http://en.wikipedia.org/w/api.php?action=parse&format=json&prop=text&section=0&page=Jimi_Hendrix",
+        contentType: "application/json; charset=utf-8",
+        async: false,
+        dataType: "json",
+        success: function (data, textStatus, jqXHR) {
+            console.log(data);
+        },
+        error: function (errorMessage) {
+        }
+    });
+});
+
+
+
+
+
+
+
+
 var Location = function(data) {
 
   var self = this;
