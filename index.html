@@ -1,229 +1,208 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-      <meta charset="utf-8" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- BOOTSTRAP STYLES-->
+  <link href="assets/css/bootstrap.css" rel="stylesheet" />
+  <!-- FONTAWESOME STYLES-->
+  <link href="assets/css/font-awesome.css" rel="stylesheet" />
+  <!-- MORRIS CHART STYLES-->
+  <link href="assets/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
+  <!-- CUSTOM STYLES-->
+  <link href="assets/css/custom.css" rel="stylesheet" />
+  <!-- GOOGLE FONTS-->
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+   <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    #myInput {
+      background-image: url('/css/searchicon.png');
+      background-position: 10px 10px;
+      background-repeat: no-repeat;
+      width: 100%;
+      font-size: 16px;
+      padding: 12px 20px 12px 40px;
+      border: 1px solid #ddd;
+      margin-bottom: 12px;
+    }
+  </style>
+
+  <style>
+    #map {
+      height: 100%;
+      margin-left: 20%;
+
+    }
+
+    /* page style */
+
+    html,
+    body {
+      height: 100%;
+      margin-left: 0%;
+      padding-top: 0%;
       
-      <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-   
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-	<!-- BOOTSTRAP STYLES-->
-    <link href="assets/css/bootstrap.css" rel="stylesheet" />
-     <!-- FONTAWESOME STYLES-->
-    <link href="assets/css/font-awesome.css" rel="stylesheet" />
-     <!-- MORRIS CHART STYLES-->
-    <link href="assets/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
-        <!-- CUSTOM STYLES-->
-    <link href="assets/css/custom.css" rel="stylesheet" />
-     <!-- GOOGLE FONTS-->
-   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-</head>
-<body>
- 
- <script>
-	 function show(){
-  document.getElementById('pin').innerHTML = document.getElementById('marker').title;
-}
-  </script>
-  
-           <!-- /. side -->
-                <nav class="navbar-default navbar-side" role="navigation">
-            <div class="sidebar-collapse">
-                <ul class="nav" id="main-menu">
-				<li class="text-center">
-                    <img src="assets/img/lisa.jpg" class="user-image img-responsive"/>
-					</li>
-				
-                   <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
-                   
-                    <li>
-                        <a class="active-menu"></i> my favourite  places in Melbourne</a>
-                    </li>
-                     <li>
-                        <a  href="ui.html"onclick="show();" value="pin"></i> My Home</a>
-                    </li>
-                    <li>
-                        <a  href="tab-panel.html"></i> Crown</a>
-                    </li>
-						   <li  >
-                        <a   href="chart.html"></i> federation square </a>
-                    </li>	
-                      <li  >
-                        <a  href="table.html"></i> City Square</a>
-                    </li>
-                    <li  >
-                        <a  href="form.html"></i> Starbucks </a>
-                    </li>	
-                     <li  >
-                        <a  href="form.html"></i> Monash College </a>
-                    </li>
-                     <li  >
-                        <a  href="form.html"></i> Albert Park </a>
-                    </li>
-                    
-                     <li  >
-                        <a  href="form.html"></i> Port melbourne Beach </a>
-                    </li>
-                    
-                     <li  >
-                        <a  href="form.html"></i> Williamstown </a>
-                    </li>
-                    
-                     <li  >
-                        <a  href="form.html"></i> Monash University' </a>
-                    </li>
-                      <li  >
-                        <a  href="form.html"></i> Chadstone </a>
-                    </li>
-                </ul> 
-            </div> 
-        </nav>  
-       <style>
-* {
-  box-sizing: border-box;
-}
+      color: black;
 
-#myInput {
-  background-image: url('/css/searchicon.png');
-  background-position: 10px 10px;
-  background-repeat: no-repeat;
-  width: 100%;
-  font-size: 16px;
-  padding: 12px 20px 12px 40px;
-  border: 1px solid #ddd;
-  margin-bottom: 12px;
-}
-
-</style>
-                
-    <style>
-    
-      #map {
-        height: 100%;
-		  margin-left: 20%;
-		
-      }
-      /* page style */
-      html, body {
-        height: 100%;
-         margin-left: 0%;
-        padding-top: 0%;
-		    background-color: black;
-		 
-      }
-    </style>
+    }
+  </style>
   </head>
-	 
-	
-   <span><div><ul data-bind="foreach:locations"><li data-bind="text:title"></li></ul></div>
+  <body>
+
+   <input data-bind="textInput: userInput" />
+    <div>
+      <ul data-bind="foreach: myLocations">
+        <li data-bind="text: title"></li>
+      </ul>
+   </div>
+   
+  
+ 
+
    <div id="map" height="460px" width="80%"></div></span>
-    <body>
-    
-   <!------->
-   
-   
+
+
     <script>
       var map;
       var marker;
-      var infowindow;   
+      var infowindow;
       var messagewindow;
 
       function initMap() {
-		  var locations=[
-          {title: 'My Home', location: {lat: -37.825242, lng: 144.965672}},
-          {title: 'Crown ', location: {lat: -37.823514, lng: 144.958076}},
-          {title: 'federation ', location: {lat: -37.817972, lng: 144.969041}},
-          {title: 'City Square' , location: {lat: -37.815871, lng: 144.966901}},
-          {title: 'Starbucks', location: {lat: -37.813480, lng: 144.966305}},
-          {title: 'Monash College', location: {lat: -37.813107, lng: 144.966281}},
-		  {title: 'Albert Park', location: {lat: -37.845071, lng: 144.968891}},
-		  {title: 'Port melbourne Beach', location: {lat: -37.842733, lng: 144.935074}},
-		  {title: 'Williamstown', location: {lat: -37.861031, lng: 144.885635}},
-		  {title: 'Monash University', location: {lat: -37.876954, lng: 145.04425}},
-		  {title: 'Chadstone', location: {lat: -37.886235, lng: 145.08296}},
+        var locations = [{
+            title: 'My Home',
+            location: {
+              lat: -37.825242,
+              lng: 144.965672
+            }
+			
+          },
+          {
+            title: 'Crown ',
+            location: {
+              lat: -37.823514,
+              lng: 144.958076
+            }
+          },
+          {
+            title: 'federation Square ',
+            location: {
+              lat: -37.817972,
+              lng: 144.969041
+            }
+          },
+          {
+            title: 'City Square',
+            location: {
+              lat: -37.815871,
+              lng: 144.966901
+            }
+          },
+          {
+            title: 'Starbucks',
+            location: {
+              lat: -37.813480,
+              lng: 144.966305
+            }
+          },
+          {
+            title: 'Monash College',
+            location: {
+              lat: -37.813107,
+              lng: 144.966281
+            }
+          },
+          {
+            title: 'Albert Park',
+            location: {
+              lat: -37.845071,
+              lng: 144.968891
+            }
+          },
+          {
+            title: 'Port melbourne Beach',
+            location: {
+              lat: -37.842733,
+              lng: 144.935074
+            }
+          },
+          {
+            title: 'Williamstown',
+            location: {
+              lat: -37.861031,
+              lng: 144.885635
+            }
+          },
+          {
+            title: 'Monash University',
+            location: {
+              lat: -37.876954,
+              lng: 145.04425
+            }
+          },
+          {
+            title: 'Chadstone',
+            location: {
+              lat: -37.886235,
+              lng: 145.08296
+            }
+          },
         ];
-		  
-		  
-	 map = new google.maps.Map(document.getElementById('map'), {
-        center: locations[0].location,
-        zoom: 13
+
+
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: locations[0].location,
+          zoom: 13
         });
-		  
-		  var infowindow=new google.maps.InfoWindow();
-			  
-		  locations.forEach(function(location){
-			  
-			  var position = location.location;
-			  var title = location.title;
-		 
-				var marker = new google.maps.Marker({
-				  position: position,
-				  map: map,
-				  title: title
-				});
-			  marker.addListener('click',function(){
-				infowindow.setContent(this.title)
-	  			infowindow.open(map,this);
-			  });
-		  });
-		  
-		   }
 
-		</script>
-	
-//});
-		  
-	
-		
-<script>
-function myFunction() {
-  var input, filter, table, tr, td, i;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("myTable");
-  tr = table.getElementsByTagName("tr");
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
-    if (td) {
-      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
+        var infowindow = new google.maps.InfoWindow();
+
+        locations.forEach(function(location) {
+
+          var position = location.location;
+          var title = location.title;
+
+          var marker = new google.maps.Marker({
+            position: position,
+            map: map,
+            title: title
+          });
+          marker.addListener('click', function() {
+            infowindow.setContent(this.title)
+            infowindow.open(map, this);
+          });
+        });
+
       }
-    }       
-  }
-}
-</script>
-
-			  
-		  //});
-
-		  
-     
     </script>
-    <script src="js/lib/knockout-3.2.0.js"></script>
-    <script src="js/app.js"></script>
-     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBi0iMl8N6hi992zExJ4GUEUvTLX0xLeZA&libraries=places&callback=initMap">
-    </script>       
-                    
-                    
-     <!-- /. WRAPPER  -->
+
+    <script src="lib/knockout-3.2.0.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBi0iMl8N6hi992zExJ4GUEUvTLX0xLeZA&libraries=places&callback=initMap">
+    </script>
+
+
+    <!-- /. WRAPPER  -->
     <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
     <!-- JQUERY SCRIPTS -->
     <script src="assets/js/jquery-1.10.2.js"></script>
-      <!-- BOOTSTRAP SCRIPTS -->
+    <!-- BOOTSTRAP SCRIPTS -->
     <script src="assets/js/bootstrap.min.js"></script>
     <!-- METISMENU SCRIPTS -->
     <script src="assets/js/jquery.metisMenu.js"></script>
-     <!-- MORRIS CHART SCRIPTS -->
-     <script src="assets/js/morris/raphael-2.1.0.min.js"></script>
+    <!-- MORRIS CHART SCRIPTS -->
+    <script src="assets/js/morris/raphael-2.1.0.min.js"></script>
     <script src="assets/js/morris/morris.js"></script>
-      <!-- CUSTOM SCRIPTS -->
+    <!-- CUSTOM SCRIPTS -->
     <script src="assets/js/custom.js"></script>
-    
-   
-</body>
+
+
+  </body>
+
 </html>
