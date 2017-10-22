@@ -5,6 +5,7 @@ var model = [{
       lng: 144.965672
     }
   },
+			
   {
     title: 'Crown ',
     location: {
@@ -76,6 +77,7 @@ var model = [{
     }
   },
 ];
+
 
 var Location = function(data) {
 
