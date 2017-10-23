@@ -5,82 +5,42 @@
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- BOOTSTRAP STYLES-->
-  <link href="assets/css/bootstrap.css" rel="stylesheet" />
-  <!-- FONTAWESOME STYLES-->
-  <link href="assets/css/font-awesome.css" rel="stylesheet" />
-  <!-- MORRIS CHART STYLES-->
-  <link href="assets/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
   <!-- CUSTOM STYLES-->
-  <link href="assets/css/custom.css" rel="stylesheet" />
-  <!-- GOOGLE FONTS-->
-  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-   <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    #myInput {
-      background-image: url('/css/searchicon.png');
-      background-position: 10px 10px;
-      background-repeat: no-repeat;
-      width: 100%;
-      font-size: 16px;
-      padding: 12px 20px 12px 40px;
-      border: 1px solid #ddd;
-      margin-bottom: 12px;
-    }
-  </style>
-
-  <style>
-    #map {
-      height: 100%;
-      margin-left: 20%;
-
-    }
-
-    /* page style */
-
-    html,
-    body {
-      height: 100%;
-      margin-left: 0%;
-      padding-top: 0%;
-      
-      color: black;
-
-    }
-  </style>
+  <link href="assets/css/custom.css" rel="stylesheet" /> 
   </head>
   <body>
-
-   <input data-bind="textInput: userInput" />
+	  <h1> Discover my Neighborhood</h1>
+	  <br>
+	  
+   <input data-bind="textInput: userInput">
     <div>
-      <ul data-bind="foreach: myLocations">
+      <ul data-bind="foreach: fillter">
         <li data-bind="text: title"></li>
       </ul>
    </div>
+
+   <!-- add html binding for the wiki info here -->
    
-  
  
+   
+   
+   
 
-   <div id="map" height="460px" width="80%"></div></span>
-
-
+		 <div id="map" height="460px" width="80%"></div></span>
+		 
+		 
     <script>
       var map;
       var marker;
       var infowindow;
-      var messagewindow;
-
+		
       function initMap() {
         var locations = [{
             title: 'My Home',
             location: {
               lat: -37.825242,
               lng: 144.965672
-            }
+            },
 			
           },
           {
@@ -89,6 +49,7 @@
               lat: -37.823514,
               lng: 144.958076
             }
+			  
           },
           {
             title: 'federation Square ',
@@ -96,6 +57,7 @@
               lat: -37.817972,
               lng: 144.969041
             }
+			  
           },
           {
             title: 'City Square',
@@ -103,6 +65,7 @@
               lat: -37.815871,
               lng: 144.966901
             }
+			  
           },
           {
             title: 'Starbucks',
@@ -110,6 +73,7 @@
               lat: -37.813480,
               lng: 144.966305
             }
+			  
           },
           {
             title: 'Monash College',
@@ -117,6 +81,7 @@
               lat: -37.813107,
               lng: 144.966281
             }
+			  
           },
           {
             title: 'Albert Park',
@@ -155,54 +120,40 @@
           },
         ];
 
+		  
+		  
 
         map = new google.maps.Map(document.getElementById('map'), {
           center: locations[0].location,
           zoom: 13
         });
-
+		  
         var infowindow = new google.maps.InfoWindow();
-
         locations.forEach(function(location) {
 
           var position = location.location;
           var title = location.title;
-
+		
           var marker = new google.maps.Marker({
             position: position,
             map: map,
             title: title
           });
+			
           marker.addListener('click', function() {
-            infowindow.setContent(this.title)
+          
+			infowindow.setContent(this.title);
             infowindow.open(map, this);
+			marker.setIcon("https://cdn3.iconfinder.com/data/icons/musthave/24/Stock%20Index%20Down.png");
           });
         });
-
       }
+		
     </script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="lib/knockout-3.2.0.js"></script>
     <script src="assets/js/app.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBi0iMl8N6hi992zExJ4GUEUvTLX0xLeZA&libraries=places&callback=initMap">
     </script>
-
-
-    <!-- /. WRAPPER  -->
-    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
-    <!-- JQUERY SCRIPTS -->
-    <script src="assets/js/jquery-1.10.2.js"></script>
-    <!-- BOOTSTRAP SCRIPTS -->
-    <script src="assets/js/bootstrap.min.js"></script>
-    <!-- METISMENU SCRIPTS -->
-    <script src="assets/js/jquery.metisMenu.js"></script>
-    <!-- MORRIS CHART SCRIPTS -->
-    <script src="assets/js/morris/raphael-2.1.0.min.js"></script>
-    <script src="assets/js/morris/morris.js"></script>
-    <!-- CUSTOM SCRIPTS -->
-    <script src="assets/js/custom.js"></script>
-
-
   </body>
-
 </html>

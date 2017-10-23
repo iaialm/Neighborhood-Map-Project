@@ -1,3 +1,4 @@
+// the locations
 var model = [{
     title: 'My Home',
     location: {
@@ -80,23 +81,24 @@ var model = [{
 
 
 
-//////////
-//////
-/////
-
-
 
  
 $(document).ready(function(){
  
     $.ajax({
         type: "GET",
-        url: "http://en.wikipedia.org/w/api.php?action=parse&format=json&prop=text&section=0&page=Jimi_Hendrix",
-        contentType: "application/json; charset=utf-8",
-        async: false,
+        url: "http://en.wikipedia.org/w/api.php?action=parse&format=json&prop=text&section=0&page=Jimi_Hendrix&origin=*",
+        //url: url,
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
             console.log(data);
+            console.log(Object.keys(data.parse))
+            console.log(data.parse.title)
+
+            // ko html binding
+            // http://knockoutjs.com/documentation/html-binding.html
+
+            // vm.yourObservableForTheWikiData(data.parse.title)
         },
         error: function (errorMessage) {
         }
@@ -121,6 +123,10 @@ var Location = function(data) {
 var ViewModel = function() {
   var self = this;
 
+  // add the observable for the wikidata here
+	 self.wikipedia = ko.observable();
+  // http://knockoutjs.com/documentation/html-binding.html
+
   self.myLocations = ko.observableArray();
 
   self.userInput = ko.observable('');
@@ -130,20 +136,41 @@ var ViewModel = function() {
     self.myLocations.push(new Location(model[i]));
   }
 
-  self.doSomething = ko.computed(function(){
-    console.log(self.userInput());
-	  
-	  
-	  
-	  
+  self.fillter = ko.computed(function(){
+
+    var userInput = self.userInput().toLowerCase();
+
+    var matchingItems = [];
+
+    //console.log(userInput);
+
+    if (!userInput) {
+      return self.myLocations();
+    }
+
+    // iterate over self.myLocations() 
+
+    self.myLocations().forEach(function(location) {
+
+      var title = location.title.toLowerCase();
+      
+      console.log(title, userInput)
+
+      // check if the substring userInput can be found in
+      // the location's title (use the toLowerCase method)
+      // use, for example, the String indexOf() method to ifnd the substring
+      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf
+      // if there is a match, push the location object to the matchingItems Array
+
+    });
+
+    return matchingItems;
 	  
   });
 
-	
-	
 };
 
 
+var vm = new ViewModel();
 
-
-ko.applyBindings(new ViewModel())
+ko.applyBindings(vm)
