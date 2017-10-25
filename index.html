@@ -13,14 +13,9 @@
 	   <h3>places:</h3>
 	  <br>
 	  
-   <input data-bind="textInput: userInput">
-    <div>
-      <ul data-bind="foreach: fillter">
-        <li data-bind="text: title"></li>
-      </ul>
-   </div>
+  
 
-	  
+	  <p>Filter: <input data-bind="value: userInput, valueUpdate: 'afterkeydown'" /></p>
    <!--  wiki  -->
 
 

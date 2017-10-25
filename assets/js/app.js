@@ -103,8 +103,8 @@ var wikiUrl='http://en.wikipedia.org/w/api.php?action=opensearch&search= &format
 				var url='http://en.wikipedia.org/wiki/'+articleleStr;
 				$.wikiElm.append('<li> a href="'+url+'">'+articleleStr+'</a><li>');
 				
-				console.log(articleleStr);
-				console.log(articlelist);
+				//console.log(articleleStr);
+				//console.log(articlelist);
 			}
 				
 			//clearTimeout(wikiReqeuestTimeout);
@@ -131,15 +131,15 @@ var ViewModel = function() {
 
   self.userInput = ko.observable('');
 
+	self.
   for (var i = 0; i < model.length; i++) {
 
     self.myLocations.push(new Location(model[i]));
   }
-
   self.fillter = ko.computed(function(){
 
     var userInput = self.userInput().toLowerCase();
-
+    var ko.utils.arraymatchingItems
     var matchingItems = [];
 
     //console.log(userInput);
@@ -147,22 +147,14 @@ var ViewModel = function() {
     if (!userInput) {
       return self.myLocations();
     }
+	  else{
+		  
+	return.ko.utils.arraymatchingItems (self.myLocations()),(function(location)
+	{
 
-    // iterate over self.myLocations() 
-
-    self.myLocations().forEach(function(location) {
-
-      var title = location.title.toLowerCase();
-
-      console.log(title, userInput)
-
-      // check if the substring userInput can be found in
-      // the location's title (use the toLowerCase method)
-      // use, for example, the String indexOf() method to ifnd the substring
-      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf
-      // if there is a match, push the location object to the matchingItems Array
-
-    });
+      return ko.utils stringStartWith(location.title().toLowerCase(),userInput);
+	
+	  }
 
     return matchingItems;
 	  
@@ -170,9 +162,26 @@ var ViewModel = function() {
 
 	
 	
-};
-
+});
 
 var vm = new ViewModel();
 
-ko.applyBindings(vm)
+ko.applyBindings(vm);
+
+
+		  
+	  
+
+    // iterate over self.myLocations() 
+
+    //self.myLocations().forEach(function(location) {
+
+      //var title = location.title.toLowerCase();
+
+      //console.log(title, userInput)
+
+      // check if the substring userInput can be found in
+      // the location's title (use the toLowerCase method)
+      // use, for example, the String indexOf() method to ifnd the substring
+      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf
+      // if there is a match, push the location object to the matchingItems Array
