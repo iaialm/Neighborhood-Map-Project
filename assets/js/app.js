@@ -81,13 +81,14 @@ var model = [{
 
 
 
-var wikiUrl='http://en.wikipedia.org/w/api.php?action=opensearch&search='+ userInput+'&format=json&callback';
+var wikiUrl='http://en.wikipedia.org/w/api.php?action=opensearch&search= &format=json&callback';
  
-var wikiReqeuestTimeout=setTimeout(function())
-{$.wikiElm.text('faild to get wikipedia resources');						   
-},8000);
+//var wikiReqeuestTimeout=setTimeout(function())
+//{$.wikiElm.text('faild to get wikipedia resources');						   
+//},8000);
 								   
- 
+  var userInput 
+
     $.ajax({
 		url:wikiUrl,
 		dataType: "jsonp",
@@ -95,15 +96,18 @@ var wikiReqeuestTimeout=setTimeout(function())
         success: function (response) {
 			
 			var articlelist = response[1]
-			
+			 
 			for(var i=0; i< articlelist.length;i++){
 				
 				var articleleStr=articlelist[i];
 				var url='http://en.wikipedia.org/wiki/'+articleleStr;
 				$.wikiElm.append('<li> a href="'+url+'">'+articleleStr+'</a><li>');
+				
+				console.log(articleleStr);
+				console.log(articlelist);
 			}
 				
-			clearTimeout(wikiReqeuestTimeout);
+			//clearTimeout(wikiReqeuestTimeout);
 			  }	
 				});
 			
@@ -132,7 +136,7 @@ var ViewModel = function() {
     self.myLocations.push(new Location(model[i]));
   }
 
-  self.doSomething = ko.computed(function(){
+  self.fillter = ko.computed(function(){
 
     var userInput = self.userInput().toLowerCase();
 

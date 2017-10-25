@@ -21,6 +21,7 @@
       height: 50%;
       margin-left: 30%;
 	  position:fixed;
+		color:black;
 		
 }
 
@@ -29,10 +30,16 @@
 	ul {
     list-style-type: none;
     margin: 0;
-    padding: 5px;
+    padding-left: 10px;
 } 
 	
+h1{
+	color: firebrick;
+}
 
+h3{
+	color: firebrick;
+}
     /* page style */
 
     html,
@@ -40,8 +47,9 @@
       height: 100%;
       margin-left: 0%;
       padding-top: 0%;
-      background: #586F74;
-      color: black;
+      background:#000000;
+      color: white;
+	  padding-left: 10px;
 
     }
 

@@ -10,6 +10,7 @@
   </head>
   <body>
 	  <h1> Discover my Neighborhood</h1>
+	   <h3>places:</h3>
 	  <br>
 	  
    <input data-bind="textInput: userInput">
@@ -19,10 +20,11 @@
       </ul>
    </div>
 
-   <!-- add html binding for the wiki info here -->
+	  
+   <!--  wiki  -->
 
 
-		 <div id="map" height="460px" width="80%"></div>
+ <div id="map" height="460px" width="80%"></div>
 		 
 		 
     <script>
@@ -143,17 +145,18 @@
           });
         });
       }
-		
-		
-		
-		
     </script>
+    
+    
     
     
     <div class="wikipedia-container">
         <h3 id="wikipedia-header"> Wikipedia Links</h3>
         <ul id="wikipedia-links"> find relevant Wikipedia articles here!</ul>
     </div>
+    
+    
+    
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="lib/knockout-3.2.0.js"></script>
