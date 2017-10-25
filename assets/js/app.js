@@ -81,7 +81,7 @@ var model = [{
 
 
 
-var wikiUrl='http://en.wikipedia.org/w/api.php?action=opensearch&search= &format=json&callback';
+var wikiUrl='http://en.wikipedia.org/w/api.php?action=opensearch&search=&format=json&callback';
  
 //var wikiReqeuestTimeout=setTimeout(function())
 //{$.wikiElm.text('faild to get wikipedia resources');						   
