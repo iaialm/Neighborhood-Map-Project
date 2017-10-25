@@ -20,13 +20,9 @@
    </div>
 
    <!-- add html binding for the wiki info here -->
-   
- 
-   
-   
-   
 
-		 <div id="map" height="460px" width="80%"></div></span>
+
+		 <div id="map" height="460px" width="80%"></div>
 		 
 		 
     <script>
@@ -143,16 +139,26 @@
           marker.addListener('click', function() {
           
 			infowindow.setContent(this.title);
-            infowindow.open(map, this);
-			marker.setIcon("https://cdn3.iconfinder.com/data/icons/musthave/24/Stock%20Index%20Down.png");
+            infowindow.open(map, this);	marker.setIcon("https://cdn3.iconfinder.com/data/icons/musthave/24/Stock%20Index%20Down.png");
           });
         });
       }
 		
+		
+		
+		
     </script>
+    
+    
+    <div class="wikipedia-container">
+        <h3 id="wikipedia-header"> Wikipedia Links</h3>
+        <ul id="wikipedia-links"> find relevant Wikipedia articles here!</ul>
+    </div>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="lib/knockout-3.2.0.js"></script>
     <script src="assets/js/app.js"></script>
+    <script src="lib/jQuery3.2.1.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBi0iMl8N6hi992zExJ4GUEUvTLX0xLeZA&libraries=places&callback=initMap">
     </script>
   </body>

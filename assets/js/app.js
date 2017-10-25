@@ -81,37 +81,33 @@ var model = [{
 
 
 
-
+var wikiUrl='http://en.wikipedia.org/w/api.php?action=opensearch&search=&format=json&callback';
  
-$(document).ready(function(){
+var wikiReqeuestTimeout=setTimeout(function())
+{$.wikiElm.text("faild to get wikipedia resources");						   
+},8000);
+								   
  
     $.ajax({
-        type: "GET",
-        url: "http://en.wikipedia.org/w/api.php?action=parse&format=json&prop=text&section=0&page=Jimi_Hendrix&origin=*",
-        //url: url,
-        dataType: "json",
-        success: function (data, textStatus, jqXHR) {
-            console.log(data);
-            console.log(Object.keys(data.parse))
-            console.log(data.parse.title)
-
-            // ko html binding
-            // http://knockoutjs.com/documentation/html-binding.html
-
-            // vm.yourObservableForTheWikiData(data.parse.title)
-        },
-        error: function (errorMessage) {
-        }
-    });
-});
-
-
-
-
-
-
-
-
+		url:wikiUrl,
+		dataType: "jsonp",
+        //type: "GET",
+        success: function (response) {
+			
+			var articlelist = response[1]
+			for(var i=0< articlelist.length;i++){
+				
+				articleleStr=articlelist[i]
+				var url='http://en.wikipedia.org/wiki/'+articleleStr;
+				$.wikiElm.append('<li> a href="'+url+'">'+articleleStr+'</a><li>');
+			};
+				
+			clearTimeout(wikiReqeuestTimeout);
+			  }	
+				});
+			
+        
+  
 var Location = function(data) {
 
   var self = this;
@@ -124,7 +120,6 @@ var ViewModel = function() {
   var self = this;
 
   // add the observable for the wikidata here
-	 self.wikipedia = ko.observable();
   // http://knockoutjs.com/documentation/html-binding.html
 
   self.myLocations = ko.observableArray();
@@ -136,7 +131,7 @@ var ViewModel = function() {
     self.myLocations.push(new Location(model[i]));
   }
 
-  self.fillter = ko.computed(function(){
+  self.doSomething = ko.computed(function(){
 
     var userInput = self.userInput().toLowerCase();
 
@@ -153,7 +148,7 @@ var ViewModel = function() {
     self.myLocations().forEach(function(location) {
 
       var title = location.title.toLowerCase();
-      
+
       console.log(title, userInput)
 
       // check if the substring userInput can be found in
@@ -168,6 +163,8 @@ var ViewModel = function() {
 	  
   });
 
+	
+	
 };
 
 
