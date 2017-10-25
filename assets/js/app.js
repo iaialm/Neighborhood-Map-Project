@@ -81,10 +81,10 @@ var model = [{
 
 
 
-var wikiUrl='http://en.wikipedia.org/w/api.php?action=opensearch&search=&format=json&callback';
+var wikiUrl='http://en.wikipedia.org/w/api.php?action=opensearch&search='+ userInput+'&format=json&callback';
  
 var wikiReqeuestTimeout=setTimeout(function())
-{$.wikiElm.text("faild to get wikipedia resources");						   
+{$.wikiElm.text('faild to get wikipedia resources');						   
 },8000);
 								   
  
@@ -95,12 +95,13 @@ var wikiReqeuestTimeout=setTimeout(function())
         success: function (response) {
 			
 			var articlelist = response[1]
-			for(var i=0< articlelist.length;i++){
+			
+			for(var i=0; i< articlelist.length;i++){
 				
-				articleleStr=articlelist[i]
+				var articleleStr=articlelist[i];
 				var url='http://en.wikipedia.org/wiki/'+articleleStr;
 				$.wikiElm.append('<li> a href="'+url+'">'+articleleStr+'</a><li>');
-			};
+			}
 				
 			clearTimeout(wikiReqeuestTimeout);
 			  }	
