@@ -103,8 +103,7 @@ var wikiUrl='http://en.wikipedia.org/w/api.php?action=opensearch&search= &format
 				var url='http://en.wikipedia.org/wiki/'+articleleStr;
 				$.wikiElm.append('<li> a href="'+url+'">'+articleleStr+'</a><li>');
 				
-				//console.log(articleleStr);
-				//console.log(articlelist);
+				
 			}
 				
 			//clearTimeout(wikiReqeuestTimeout);
@@ -124,14 +123,11 @@ var Location = function(data) {
 var ViewModel = function() {
   var self = this;
 
-  // add the observable for the wikidata here
-  // http://knockoutjs.com/documentation/html-binding.html
-
   self.myLocations = ko.observableArray();
 
   self.userInput = ko.observable('');
 
-	self.
+	
   for (var i = 0; i < model.length; i++) {
 
     self.myLocations.push(new Location(model[i]));
@@ -142,7 +138,6 @@ var ViewModel = function() {
     var ko.utils.arraymatchingItems
     var matchingItems = [];
 
-    //console.log(userInput);
 
     if (!userInput) {
       return self.myLocations();
@@ -159,8 +154,6 @@ var ViewModel = function() {
     return matchingItems;
 	  
   });
-
-	
 	
 });
 
@@ -170,8 +163,11 @@ ko.applyBindings(vm);
 
 
 		  
+    //console.log(userInput);
 	  
-
+  // add the observable for the wikidata here
+  // http://knockoutjs.com/documentation/html-binding.html
+	  
     // iterate over self.myLocations() 
 
     //self.myLocations().forEach(function(location) {
