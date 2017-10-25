@@ -115,7 +115,7 @@ var ViewModel = function() {
 
     return self.filter;
   });
-}
+};
 
 var vm = new ViewModel();
 
@@ -127,7 +127,7 @@ var wikiUrl='https://en.wikipedia.org/w/api.php?action=query&format=json&limit=1
 //{$.wikiElm.text('faild to get wikipedia resources');
 //},8000);
 
-var userInput
+var userInput;
 
 $.ajax({
   url:wikiUrl,
@@ -149,21 +149,4 @@ $.ajax({
 });
 
 
-//console.log(userInput);
 
-  // add the observable for the wikidata here
-  // http://knockoutjs.com/documentation/html-binding.html
-
-  // iterate over self.myLocations()
-
-  //self.myLocations().forEach(function(location) {
-
-  //var title = location.title.toLowerCase();
-
-  //console.log(title, userInput)
-
-  // check if the substring userInput can be found in
-  // the location's title (use the toLowerCase method)
-  // use, for example, the String indexOf() method to ifnd the substring
-  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf
-  // if there is a match, push the location object to the matchingItems Array
