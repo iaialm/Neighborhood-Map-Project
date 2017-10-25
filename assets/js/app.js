@@ -1,12 +1,13 @@
 // the locations
-var model = [{
+var model = [
+  {
     title: 'My Home',
     location: {
       lat: -37.825242,
       lng: 144.965672
     }
   },
-			
+
   {
     title: 'Crown ',
     location: {
@@ -81,103 +82,88 @@ var model = [{
 
 
 
-var wikiUrl='http://en.wikipedia.org/w/api.php?action=opensearch&search=&format=json&callback';
- 
-//var wikiReqeuestTimeout=setTimeout(function())
-//{$.wikiElm.text('faild to get wikipedia resources');						   
-//},8000);
-								   
-  var userInput 
-
-    $.ajax({
-		url:wikiUrl,
-		dataType: "jsonp",
-        //type: "GET",
-        success: function (response) {
-			
-			var articlelist = response[1]
-			 
-			for(var i=0; i< articlelist.length;i++){
-				
-				var articleleStr=articlelist[i];
-				var url='http://en.wikipedia.org/wiki/'+articleleStr;
-				$.wikiElm.append('<li> a href="'+url+'">'+articleleStr+'</a><li>');
-				
-				
-			}
-				
-			//clearTimeout(wikiReqeuestTimeout);
-			  }	
-				});
-			
-        
-  
 var Location = function(data) {
-
   var self = this;
+
   self.title = data.title;
   self.position = data.location;
-
 };
 
 var ViewModel = function() {
   var self = this;
 
   self.myLocations = ko.observableArray();
-
   self.userInput = ko.observable('');
 
-	
   for (var i = 0; i < model.length; i++) {
-
     self.myLocations.push(new Location(model[i]));
   }
+
   self.fillter = ko.computed(function(){
-
     var userInput = self.userInput().toLowerCase();
-    var ko.utils.arraymatchingItems
     var matchingItems = [];
-
 
     if (!userInput) {
       return self.myLocations();
     }
-	  else{
-		  
-	return.ko.utils.arraymatchingItems (self.myLocations()),(function(location)
-	{
+    else {
+      return ko.utils.arrayFilter(
+        self.myLocations(), function(location) {
+          return ko.utils.stringStartsWith(location.title.toLowerCase(), userInput);
+        });
+    }
 
-      return ko.utils stringStartWith(location.title().toLowerCase(),userInput);
-	
-	  }
-
-    return matchingItems;
-	  
+    return self.filter;
   });
-	
-});
+}
 
 var vm = new ViewModel();
 
 ko.applyBindings(vm);
 
+var wikiUrl='https://en.wikipedia.org/w/api.php?action=query&format=json&limit=15&callback=?&titles=';
 
-		  
-    //console.log(userInput);
-	  
+//var wikiReqeuestTimeout=setTimeout(function())
+//{$.wikiElm.text('faild to get wikipedia resources');
+//},8000);
+
+var userInput
+
+$.ajax({
+  url:wikiUrl,
+  dataType: "jsonp",
+  //type: "GET",
+  success: function (response) {
+    debugger;
+    var articlelist = response[1];
+
+    for(var i=0 ; i<articlelist.length ;i++){
+      var articleleStr=articlelist[i];
+      var url='http://en.wikipedia.org/wiki/'+articleleStr;
+
+      $.wikiElm.append('<li> a href="'+url+'">'+articleleStr+'</a><li>');
+    }
+
+    //clearTimeout(wikiReqeuestTimeout);
+  }
+});
+
+
+//console.log(userInput);
+
   // add the observable for the wikidata here
   // http://knockoutjs.com/documentation/html-binding.html
-	  
-    // iterate over self.myLocations() 
 
-    //self.myLocations().forEach(function(location) {
+  // iterate over self.myLocations()
 
-      //var title = location.title.toLowerCase();
+  //self.myLocations().forEach(function(location) {
 
-      //console.log(title, userInput)
+  //var title = location.title.toLowerCase();
 
-      // check if the substring userInput can be found in
-      // the location's title (use the toLowerCase method)
-      // use, for example, the String indexOf() method to ifnd the substring
-      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf
-      // if there is a match, push the location object to the matchingItems Array
+  //console.log(title, userInput)
+
+  // check if the substring userInput can be found in
+  // the location's title (use the toLowerCase method)
+  // use, for example, the String indexOf() method to ifnd the substring
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf
+  // if there is a match, push the location object to the matchingItems Array
