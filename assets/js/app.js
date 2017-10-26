@@ -121,7 +121,7 @@ var vm = new ViewModel();
 
 ko.applyBindings(vm);
 
-var wikiUrl='https://en.wikipedia.org/w/api.php?action=query&format=json&limit=15&callback=?&titles=';
+var wikiUrl='https://en.wikipedia.org/w/api.php?action=query&titles=Main%20Page&prop=revisions&rvprop=content&format=jsonp';
 
 //var wikiReqeuestTimeout=setTimeout(function())
 //{$.wikiElm.text('faild to get wikipedia resources');
