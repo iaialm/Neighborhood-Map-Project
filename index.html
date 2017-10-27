@@ -1,162 +1,40 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- CUSTOM STYLES-->
-  <link href="assets/css/custom.css" rel="stylesheet" /> 
-  </head>
-  <body>
-	  <h1> Discover my Neighborhood</h1>
-	   <h3>places:</h3>
-	  <br>
-	  
-	  <p>Filter: <input data-bind="textInput: userInput"></p>
-      <ul data-bind="foreach: fillter">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CUSTOM STYLES-->
+    <link href="assets/css/custom.css" rel="stylesheet" />
+</head>
+<!--list -->
+<body>
+   <span>
+    <h1> Discover my Neighborhood</h1>
+    <h3>places:</h3>
+    <br>
+    <!--fillter -->
+    <p>Filter:
+        <input data-bind="textInput: userInput">
+    </p>
+    <ul data-bind="foreach: fillter">
         <li data-bind="text: title"></li>
-      </ul>
-  
- <div id="map" height="460px" width="80%"></div>
-		 
-		 
-    <script>
-      var map;
-      var marker;
-      var infowindow;
-		
-      function initMap() {
-        var locations = [{
-            title: 'My Home',
-            location: {
-              lat: -37.825242,
-              lng: 144.965672
-            },
-			
-          },
-          {
-            title: 'Crown ',
-            location: {
-              lat: -37.823514,
-              lng: 144.958076
-            }
-			  
-          },
-          {
-            title: 'federation Square ',
-            location: {
-              lat: -37.817972,
-              lng: 144.969041
-            }
-			  
-          },
-          {
-            title: 'City Square',
-            location: {
-              lat: -37.815871,
-              lng: 144.966901
-            }
-			  
-          },
-          {
-            title: 'Starbucks',
-            location: {
-              lat: -37.813480,
-              lng: 144.966305
-            }
-			  
-          },
-          {
-            title: 'Monash College',
-            location: {
-              lat: -37.813107,
-              lng: 144.966281
-            }
-			  
-          },
-          {
-            title: 'Albert Park',
-            location: {
-              lat: -37.845071,
-              lng: 144.968891
-            }
-          },
-          {
-            title: 'Port melbourne Beach',
-            location: {
-              lat: -37.842733,
-              lng: 144.935074
-            }
-          },
-          {
-            title: 'Williamstown',
-            location: {
-              lat: -37.861031,
-              lng: 144.885635
-            }
-          },
-          {
-            title: 'Monash University',
-            location: {
-              lat: -37.876954,
-              lng: 145.04425
-            }
-          },
-          {
-            title: 'Chadstone',
-            location: {
-              lat: -37.886235,
-              lng: 145.08296
-            }
-          },
-        ];
-
-		  
-		  
-
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: locations[0].location,
-          zoom: 13
-        });
-		  
-        var infowindow = new google.maps.InfoWindow();
-        locations.forEach(function(location) {
-
-          var position = location.location;
-          var title = location.title;
-		
-          var marker = new google.maps.Marker({
-            position: position,
-            map: map,
-            title: title
-          });
-			
-          marker.addListener('click', function() {
-          
-			infowindow.setContent(this.title);
-            infowindow.open(map, this);	marker.setIcon("https://cdn3.iconfinder.com/data/icons/musthave/24/Stock%20Index%20Down.png");
-          });
-        });
-      }
-    </script>
-    
-    
-    
-    
-    <div class="wikipedia-container">
-        <h3 id="wikipedia-header"> Wikipedia Links</h3>
-        <ul id="wikipedia-links"> find relevant Wikipedia articles here!</ul>
-    </div>
-    
-    
-    
-    
+    </ul>
+    <!--google map -->
+    <div id="map" height="460px" width="80%"></div>
+    </span>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- knockout.js file -->
     <script src="lib/knockout-3.2.0.js"></script>
+    <!-- javascript file-->
     <script src="assets/js/app.js"></script>
+    <!--jQuery.js -->
     <script src="lib/jQuery3.2.1.js"></script>
+    <!--google API-->
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBi0iMl8N6hi992zExJ4GUEUvTLX0xLeZA&libraries=places&callback=initMap">
     </script>
-  </body>
+</body>
+
 </html>
