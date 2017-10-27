@@ -1,67 +1,52 @@
-// maps and other code
-var map;
-var marker;
-var infowindow;
+// the map 
 var locations = [{
     title: 'My Home',
     location: {
         lat: -37.825242,
         lng: 144.965672
     },
-    url: '',
 }, {
     title: 'Crown ',
     location: {
         lat: -37.823514,
         lng: 144.958076
     },
-    url: '',
-
 }, {
     title: 'federation Square ',
     location: {
         lat: -37.817972,
         lng: 144.969041
     },
-    url: '',
 }, {
     title: 'City Square',
     location: {
         lat: -37.815871,
         lng: 144.966901
     },
-    url: '',
-
 }, {
     title: 'Starbucks',
     location: {
         lat: -37.813480,
         lng: 144.966305
     },
-    url: '',
-
 }, {
     title: 'Monash College',
     location: {
         lat: -37.813107,
         lng: 144.966281
     },
-    url: '',
-
 }, {
     title: 'Albert Park',
     location: {
         lat: -37.845071,
         lng: 144.968891
     },
-    url: '',
 }, {
     title: 'Port melbourne Beach',
     location: {
         lat: -37.842733,
         lng: 144.935074
     },
-    url: '',
 }, {
     title: 'Williamstown',
     location: {
@@ -106,14 +91,14 @@ function initMap() {
         marker.addListener('click', function() {
             var url = location.url;
             console.log(locations);
-            infowindow.setContent(this.title + "  " + "for more information check the link " + "  " + url);
+            infowindow.setContent(this.title + "  " + " check this link " + "  " + url);
             infowindow.open(map, this);
             marker.setIcon("https://cdn3.iconfinder.com/data/icons/musthave/24/Stock%20Index%20Down.png");
         });
     });
 }
 
-// the locations
+//locations
 var model = [{
         title: 'My Home',
         location: {
@@ -121,7 +106,6 @@ var model = [{
             lng: 144.965672
         }
     },
-
     {
         title: 'Crown ',
         location: {
@@ -209,17 +193,16 @@ var ViewModel = function() {
     self.fillter = ko.computed(function() {
         var userInput = self.userInput().toLowerCase();
         var matchingItems = [];
-
+ console.log(userInput);
         if (!userInput) {
             return self.myLocations();
         } else {
             return ko.utils.arrayFilter(
                 self.myLocations(),
                 function(location) {
-                    return ko.utils.stringStartsWith(location.title.toLowerCase(), userInput);
+                return ko.utils.indexOf(location.title.toLowerCase(), userInput);
                 });
         }
-
         return self.filter;
     });
 };
@@ -228,12 +211,11 @@ var vm = new ViewModel();
 
 ko.applyBindings(vm);
 
+
+// wikepedia section 
 function getURL(title, index) {
 	"use strict";
     var wikiUrl = 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + title + '&format=json';
-
-    console.log('dss');
-
     $.ajax({
         url: wikiUrl,
         dataType: "jsonp",
@@ -245,11 +227,9 @@ function getURL(title, index) {
                 var url = 'http://en.wikipedia.org/wiki/' + articleleStr;
                 locations[index].url = url;
             }
-
         }
     });
 }
-
 function setAllURLs() {
 	"use strict";
     for (var i = 0; i < locations.length; i++)
