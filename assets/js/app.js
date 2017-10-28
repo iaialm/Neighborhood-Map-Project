@@ -179,37 +179,39 @@ var Location = function(data) {
     self.position = data.location;
 };
 
+
 var ViewModel = function() {
 	"use strict";
     var self = this;
-
-    self.myLocations = ko.observableArray();
+    self.locations = ko.observableArray();
     self.userInput = ko.observable('');
-
     for (var i = 0; i < model.length; i++) {
-        self.myLocations.push(new Location(model[i]));
+    self.locations.push(new Location(model[i]));
     }
 
-    self.fillter = ko.computed(function() {
+    self.fillterdlocations = ko.computed(function() {
         var userInput = self.userInput().toLowerCase();
-        var matchingItems = [];
- console.log(userInput);
+        //var matchingItems = [];
+
         if (!userInput) {
-            return self.myLocations();
+            return self.locations();
         } else {
             return ko.utils.arrayFilter(
-                self.myLocations(),
+                self.locations(),
                 function(location) {
-                return ko.utils.indexOf(location.title.toLowerCase(), userInput);
+                return ko.utils.stringStartWith(location.title.toLowerCase(),userInput);
                 });
         }
-        return self.filter;
+
+        return self.fillterdlocations;
+		console.log(fillterdlocations);
     });
 };
 
 var vm = new ViewModel();
 
 ko.applyBindings(vm);
+
 
 
 // wikepedia section 
