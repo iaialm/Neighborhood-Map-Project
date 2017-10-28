@@ -204,7 +204,7 @@ var ViewModel = function() {
         }
 
         return self.fillterdlocations;
-		console.log(fillterdlocations);
+		
     });
 };
 
