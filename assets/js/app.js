@@ -199,7 +199,7 @@ var ViewModel = function() {
             return ko.utils.arrayFilter(
                 self.locations(),
                 function(location) {
-                return ko.utils.stringStartWith(location.title.toLowerCase(),userInput);
+                return location.title.toLowerCase().startsWith(userInput);
                 });
         }
 
