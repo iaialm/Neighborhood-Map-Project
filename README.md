@@ -29,3 +29,5 @@ https://stackoverflow.com/questions/27754101/change-google-maps-marker-icon-when
 http://www.knockmeout.net
 # 3
 http://knockoutjs.com
+# 4 
+https://github.com/udacity/ud864/blob/master/Project_Code_5_BeingStylish.html#L239

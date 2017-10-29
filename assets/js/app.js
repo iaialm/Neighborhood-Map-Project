@@ -75,7 +75,6 @@ function initMap() {
         zoom: 13
     });
 
-    // https://github.com/udacity/ud864/blob/master/Project_Code_5_BeingStylish.html#L239
     function makeMarkerIcon(markerColor) {
         var markerImage = new google.maps.MarkerImage(
           'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|'+ markerColor +
@@ -115,8 +114,7 @@ function initMap() {
             var url = location.url;
             console.log(locations);
             infowindow.setContent(this.title + "  " + " check this link " + "  " + url);
-            infowindow.open(map, this);
-            marker.setIcon("https://cdn3.iconfinder.com/data/icons/musthave/24/Stock%20Index%20Down.png");
+            infowindow.open(map, this); marker.setIcon("https://cdn3.iconfinder.com/data/icons/musthave/24/Stock%20Index%20Down.png");
         });
     });
 }
@@ -225,8 +223,9 @@ var ViewModel = function() {
     // http://knockoutjs.com/documentation/click-binding.html#note-1-passing-a-current-item-as-a-parameter-to-your-handler-function
     self.doSomethingWithTheMarkerWhenListItemClicked = function(clickedLocation) {
       //console.log('click')
-      console.log(clickedLocation)
+      //console.log(clickedLocation)
 
+	google.maps.event.trigger(map.clickedLocation);
       // use clickedLocation.marker to activate the clicked list item's map marker
       // for example, the google.maps.event.trigger() method can be helpful
     };
@@ -242,7 +241,9 @@ ko.applyBindings(vm);
 function getURL(title, index) {
 	"use strict";
     var wikiUrl = 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + title + '&format=json';
-	
+	var wikiRequestTimeout = setTimeout(function() {
+  $wikiElem.text('failed to get Wikipedia resources');
+}, 8000);
     $.ajax({
         url: wikiUrl,
         dataType: "jsonp",
@@ -253,8 +254,11 @@ function getURL(title, index) {
                 var articleleStr = articlelist[i];
                 var url = 'http://en.wikipedia.org/wiki/' + articleleStr;
                 locations[index].url = url;
+				
             }
+			
         }
+		//clearTimeout(wikiRequestTimeout);
     });
 }
 function setAllURLs() {
