@@ -68,6 +68,7 @@ var locations = [{
 }, ];
 
 function initMap() {
+	
     setAllURLs();
 
     map = new google.maps.Map(document.getElementById('map'), {
@@ -85,7 +86,7 @@ function initMap() {
           new google.maps.Size(21,34));
         return markerImage;
       }
-      var markers = []
+      var markers = [];
       var defaultIcon = makeMarkerIcon('0091ff');
 
 
@@ -103,9 +104,9 @@ function initMap() {
             index: index
         });
 
-        markers.push(marker)
+        markers.push(marker);
 
-        vm.locations()[index].marker = marker
+        vm.locations()[index].marker = marker;
 
         marker.addListener('click', function() {
             markers.forEach(function(marker) {
@@ -223,9 +224,9 @@ var ViewModel = function() {
     // http://knockoutjs.com/documentation/click-binding.html#note-1-passing-a-current-item-as-a-parameter-to-your-handler-function
     self.doSomethingWithTheMarkerWhenListItemClicked = function(clickedLocation) {
       //console.log('click')
-      //console.log(clickedLocation)
+      console.log(clickedLocation);
 
-	google.maps.event.trigger(map.clickedLocation);
+	//google.maps.event.trigger(map.clickedLocation);
       // use clickedLocation.marker to activate the clicked list item's map marker
       // for example, the google.maps.event.trigger() method can be helpful
     };
