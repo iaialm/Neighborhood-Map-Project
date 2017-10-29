@@ -19,7 +19,7 @@
         <input data-bind="textInput: userInput">
     </p>
     <ul data-bind="foreach: fillterdlocations">
-        <li data-bind="text: title"></li>
+        <li data-bind="text: title, click: $root.doSomethingWithTheMarkerWhenListItemClicked"></li>
     </ul>
     <!--google map -->
     <div id="map" height="460px" width="80%"></div>
@@ -31,6 +31,7 @@
     <!--jQuery.js -->
     <script src="lib/jQuery3.2.1.js"></script>
     <!--google API-->
+    <!-- https://www.w3schools.com/jsref/event_onerror.asp -->
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBi0iMl8N6hi992zExJ4GUEUvTLX0xLeZA&libraries=places&callback=initMap">
     </script>
 </body>

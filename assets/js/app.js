@@ -75,8 +75,23 @@ function initMap() {
         zoom: 13
     });
 
+    // https://github.com/udacity/ud864/blob/master/Project_Code_5_BeingStylish.html#L239
+    function makeMarkerIcon(markerColor) {
+        var markerImage = new google.maps.MarkerImage(
+          'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|'+ markerColor +
+          '|40|_|%E2%80%A2',
+          new google.maps.Size(21, 34),
+          new google.maps.Point(0, 0),
+          new google.maps.Point(10, 34),
+          new google.maps.Size(21,34));
+        return markerImage;
+      }
+      var markers = []
+      var defaultIcon = makeMarkerIcon('0091ff');
+
+
     var infowindow = new google.maps.InfoWindow();
-    locations.forEach(function(location) {
+    locations.forEach(function(location, index) {
 
         var position = location.location;
         var title = location.title;
@@ -85,10 +100,18 @@ function initMap() {
         var marker = new google.maps.Marker({
             position: position,
             map: map,
-            title: title
+            title: title,
+            index: index
         });
 
+        markers.push(marker)
+
+        vm.locations()[index].marker = marker
+
         marker.addListener('click', function() {
+            markers.forEach(function(marker) {
+              marker.setIcon(defaultIcon)
+            })
             var url = location.url;
             console.log(locations);
             infowindow.setContent(this.title + "  " + " check this link " + "  " + url);
@@ -191,21 +214,22 @@ var ViewModel = function() {
 
     self.fillterdlocations = ko.computed(function() {
         var userInput = self.userInput().toLowerCase();
-        //var matchingItems = [];
 
-        if (!userInput) {
-            return self.locations();
-        } else {
-            return ko.utils.arrayFilter(
-                self.locations(),
-                function(location) {
-                return location.title.toLowerCase().startsWith(userInput);
+        return ko.utils.arrayFilter(self.locations(), function(location) {
+                  var doesMatch = location.title.toLowerCase().indexOf(userInput) >= 0; // true or false
+                  if (location.marker) location.marker.setVisible(doesMatch)
+                  return doesMatch
                 });
-        }
-
-        return self.fillterdlocations;
-		
     });
+
+    // http://knockoutjs.com/documentation/click-binding.html#note-1-passing-a-current-item-as-a-parameter-to-your-handler-function
+    self.doSomethingWithTheMarkerWhenListItemClicked = function(clickedLocation) {
+      //console.log('click')
+      console.log(clickedLocation)
+
+      // use clickedLocation.marker to activate the clicked list item's map marker
+      // for example, the google.maps.event.trigger() method can be helpful
+    };
 };
 
 var vm = new ViewModel();
@@ -218,6 +242,7 @@ ko.applyBindings(vm);
 function getURL(title, index) {
 	"use strict";
     var wikiUrl = 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + title + '&format=json';
+	
     $.ajax({
         url: wikiUrl,
         dataType: "jsonp",
