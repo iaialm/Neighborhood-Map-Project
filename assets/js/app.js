@@ -217,19 +217,12 @@ var ViewModel = function() {
         return ko.utils.arrayFilter(self.locations(), function(location) {
                   var doesMatch = location.title.toLowerCase().indexOf(userInput) >= 0; // true or false
                   if (location.marker) location.marker.setVisible(doesMatch)
-                  return doesMatch
+                  return doesMatch;
                 });
     });
 
-    // http://knockoutjs.com/documentation/click-binding.html#note-1-passing-a-current-item-as-a-parameter-to-your-handler-function
-    self.doSomethingWithTheMarkerWhenListItemClicked = function(clickedLocation) {
-      //console.log('click')
-      console.log(clickedLocation);
-
-	//google.maps.event.trigger(map.clickedLocation);
-      // use clickedLocation.marker to activate the clicked list item's map marker
-      // for example, the google.maps.event.trigger() method can be helpful
-    };
+    
+  
 };
 
 var vm = new ViewModel();
@@ -242,6 +235,7 @@ ko.applyBindings(vm);
 function getURL(title, index) {
 	"use strict";
     var wikiUrl = 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + title + '&format=json';
+	
 	var wikiRequestTimeout = setTimeout(function() {
   $wikiElem.text('failed to get Wikipedia resources');
 }, 8000);
