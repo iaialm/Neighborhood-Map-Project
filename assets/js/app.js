@@ -225,7 +225,7 @@ var ViewModel = function() {
       
       console.log(clickedLocation);
 
-	google.maps.event.trigger(clickedLocation,"click")
+	google.maps.event.trigger(clickedLocation.marker,"click")
       
     };   
   
@@ -241,11 +241,7 @@ ko.applyBindings(vm);
 function getURL(title, index) {
 	"use strict";
     var wikiUrl = 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + title + '&format=json';
-	
-	var wikiRequestTimeout = setTimeout(function() {
-
-  $wikiElem.text('failed to get Wikipedia resources');
-}, 8000);
+    
     $.ajax({
         url: wikiUrl,
         dataType: "jsonp",
@@ -258,9 +254,10 @@ function getURL(title, index) {
                 locations[index].url = url;
 				
             }
-			clearTimeout(wikiRequestTimeout);
+        },
+        error: function(error){
+            alert("Failed to load data from server");   
         }
-		
     });
 }
 function setAllURLs() {
@@ -269,8 +266,7 @@ function setAllURLs() {
         getURL(locations[i].title,i);
 }
 
-
- function errorMap()
-        {
-            document.getElementById('map').innerHTML = "Error. Map didn't load";
-        }
+function errorMap()
+{
+    document.getElementById('map').innerHTML = "Error. Map didn't load";
+}
