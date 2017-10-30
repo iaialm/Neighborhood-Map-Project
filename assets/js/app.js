@@ -221,7 +221,13 @@ var ViewModel = function() {
                 });
     });
 
-    
+ self.WhenListItemClicked = function(clickedLocation) {
+      
+      //console.log(clickedLocation);
+
+	google.maps.event.trigger(clickedLocation);
+      
+    };   
   
 };
 
