@@ -243,6 +243,7 @@ function getURL(title, index) {
     var wikiUrl = 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + title + '&format=json';
 	
 	var wikiRequestTimeout = setTimeout(function() {
+
   $wikiElem.text('failed to get Wikipedia resources');
 }, 8000);
     $.ajax({
@@ -267,3 +268,9 @@ function setAllURLs() {
     for (var i = 0; i < locations.length; i++)
         getURL(locations[i].title,i);
 }
+
+
+ function errorMap()
+        {
+            document.getElementById('map').innerHTML = "Error. Map didn't load";
+        }
