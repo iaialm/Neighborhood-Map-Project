@@ -41,12 +41,7 @@ var locations = [{
         lat: -37.845071,
         lng: 144.968891
     },
-}, {
-    title: 'Port melbourne Beach',
-    location: {
-        lat: -37.842733,
-        lng: 144.935074
-    },
+
 }, {
     title: 'Williamstown',
     location: {
@@ -164,12 +159,7 @@ var model = [{
             lat: -37.845071,
             lng: 144.968891
         }
-    }, {
-        title: 'Port melbourne Beach',
-        location: {
-            lat: -37.842733,
-            lng: 144.935074
-        }
+    
     }, {
         title: 'Williamstown',
         location: {
@@ -247,7 +237,6 @@ function getURL(title, index) {
         dataType: "jsonp",
         success: function(response) {
             var articlelist = response[1];
-
             for (var i = 0; i < articlelist.length; i++) {
                 var articleleStr = articlelist[i];
                 var url = 'http://en.wikipedia.org/wiki/' + articleleStr;
@@ -256,6 +245,8 @@ function getURL(title, index) {
             }
         },
         error: function(error){
+			
+			
             alert("Failed to load data from server");   
         }
     });

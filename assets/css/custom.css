@@ -33,13 +33,9 @@
     padding-left: 10px;
 } 
 	
-h1{
-	color: firebrick;
-}
 
-h3{
-	color: firebrick;
-}
+
+
     /* page style */
 
     html,
@@ -47,8 +43,8 @@ h3{
       height: 100%;
       margin-left: 0%;
       padding-top: 0%;
-      background:#000000;
-      color: white;
+      background:#638BA4;
+      color:black;
 	  padding-left: 10px;
 
     }
