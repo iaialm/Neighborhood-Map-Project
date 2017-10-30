@@ -110,8 +110,8 @@ function initMap() {
 
         marker.addListener('click', function() {
             markers.forEach(function(marker) {
-              marker.setIcon(defaultIcon)
-            })
+              marker.setIcon(defaultIcon);
+            });
             var url = location.url;
             console.log(locations);
             infowindow.setContent(this.title + "  " + " check this link " + "  " + url);
@@ -216,7 +216,7 @@ var ViewModel = function() {
 
         return ko.utils.arrayFilter(self.locations(), function(location) {
                   var doesMatch = location.title.toLowerCase().indexOf(userInput) >= 0; // true or false
-                  if (location.marker) location.marker.setVisible(doesMatch)
+                  if (location.marker)location.marker.setVisible(doesMatch);
                   return doesMatch;
                 });
     });
