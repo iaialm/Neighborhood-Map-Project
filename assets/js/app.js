@@ -223,9 +223,9 @@ var ViewModel = function() {
 
  self.WhenListItemClicked = function(clickedLocation) {
       
-      //console.log(clickedLocation);
+      console.log(clickedLocation);
 
-	google.maps.event.trigger(clickedLocation);
+	google.maps.event.trigger(clickedLocation,"click")
       
     };   
   
