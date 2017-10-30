@@ -225,7 +225,7 @@ var ViewModel = function() {
       
       console.log(clickedLocation);
 
-	google.maps.event.trigger(clickedLocation.marker,"click")
+	google.maps.event.trigger(clickedLocation.marker,"click");
       
     };   
   
