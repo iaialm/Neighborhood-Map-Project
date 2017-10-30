@@ -251,9 +251,9 @@ function getURL(title, index) {
                 locations[index].url = url;
 				
             }
-			
+			clearTimeout(wikiRequestTimeout);
         }
-		//clearTimeout(wikiRequestTimeout);
+		
     });
 }
 function setAllURLs() {
